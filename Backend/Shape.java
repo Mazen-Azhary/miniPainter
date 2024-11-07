@@ -2,6 +2,7 @@ package Backend;
 
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Map;
 
 /*
@@ -14,7 +15,7 @@ import java.util.Map;
  * @author Mazen
  */
 public interface Shape {
-    public void setPosition();
+    public void setPosition(Point startingP,Point EndingP);
     public void setProperties(Map<String,Double> properties);
     public Map<String,Double> getProperties();
     public void setColor(Color color);
