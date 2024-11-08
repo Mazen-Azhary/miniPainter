@@ -65,7 +65,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jButton5" min="-2" pref="106" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton6" min="-2" pref="106" max="-2" attributes="0"/>
+                              <Component id="shapeDeleterButton" min="-2" pref="106" max="-2" attributes="0"/>
                           </Group>
                           <Component id="welcomeLabel" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
                       </Group>
@@ -91,7 +91,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="shapeDeleterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="245" max="32767" attributes="0"/>
               </Group>
@@ -122,10 +122,13 @@
             <Property name="text" type="java.lang.String" value="Colorize"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="shapeDeleterButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shapeDeleterButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="welcomeLabel">
         </Component>
