@@ -27,10 +27,7 @@ public class mainWIndow extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Vector Drawing Application");
         this.setResizable(false);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - this.getWidth()) / 2;
-        int y = (screenSize.height - this.getHeight()) / 2;
-        setLocation(x, y);
+       this.setLocationRelativeTo(null);
         //this.drawingArea.setSize(new Dimension(this.drawingArea.getWidth(),this.drawingArea.getHeight()));
         // this.setSize(new Dimension(835, 445));
         this.setVisible(true);
@@ -230,7 +227,8 @@ private void updateBoundaryLabels() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawRectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawRectActionPerformed
-        // TODO add your handling code here:
+        RectangleWindow w = new RectangleWindow(this);
+        w.setVisible(true);
     }//GEN-LAST:event_drawRectActionPerformed
 
     private void drawSquareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawSquareActionPerformed

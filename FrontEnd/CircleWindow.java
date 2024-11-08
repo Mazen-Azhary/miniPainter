@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
  * @author Mazen
  */
 public class CircleWindow extends javax.swing.JFrame {
+
     static mainWIndow parent;
+
     /**
      * Creates new form CircleWindow
      */
@@ -131,11 +133,12 @@ public class CircleWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawCircleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawCircleActionPerformed
-        try{
-            int x = Integer.parseInt(xCentre.getText().trim().replace("\n",""));
-            int y = Integer.parseInt(yCentre.getText().trim().replace("\n",""));
-            int radius = Integer.parseInt(radiusText.getText().trim().replace("\n",""));
-                            float stroke;
+        try {
+            if (!xCentre.getText().isEmpty() && !yCentre.getText().isEmpty() && !radiusText.getText().isEmpty()) {
+                int x = Integer.parseInt(xCentre.getText().trim().replace("\n", ""));
+                int y = Integer.parseInt(yCentre.getText().trim().replace("\n", ""));
+                int radius = Integer.parseInt(radiusText.getText().trim().replace("\n", ""));
+                float stroke;
                 if (StrokeText.getText().isEmpty()) {
                     stroke = 2; // default stroke value if not specefied
                 } else {
@@ -145,20 +148,25 @@ public class CircleWindow extends javax.swing.JFrame {
                         stroke = 2;
                     }
                 }
-            Map<String,Double> properties = new HashMap<>();
-            properties.put("Radius",radius*1.0 );
-            properties.put("X-Centre", x*1.0);
-            properties.put("Y-Centre", y*1.0);
-            Circle c = new Circle(new Point(x,y), radius*1.0, properties);
-            parent.engine.addShape(c);
-            parent.repaint();
-            this.setVisible(false);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "please input valid numbers","invalid entry",JOptionPane.ERROR_MESSAGE);
-        
+                Map<String, Double> properties = new HashMap<>();
+                properties.put("Radius", radius * 1.0);
+                properties.put("X-Centre", x * 1.0);
+                properties.put("Y-Centre", y * 1.0);
+                Circle c = new Circle(new Point(x, y), radius * 1.0, properties);
+                parent.engine.addShape(c);
+                parent.repaint();
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "please input valid numbers", "invalid entry", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "please input valid numbers", "invalid entry", JOptionPane.ERROR_MESSAGE);
+
         }
-        
-        
+
+
     }//GEN-LAST:event_drawCircleActionPerformed
 
     /**
