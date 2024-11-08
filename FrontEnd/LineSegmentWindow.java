@@ -182,6 +182,8 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                 parent.engine.addShape(line);
                 parent.repaint();
                 // line.draw((Graphics) parent.getDrawingArea());
+                
+                parent.bindShapesToComboBox();
                 this.setVisible(false);
 
             } catch (NumberFormatException ex) {

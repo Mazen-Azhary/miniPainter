@@ -5,6 +5,7 @@
 package FrontEnd;
 
 import Backend.DrawerClass;
+import Backend.Shape;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -27,7 +28,7 @@ public class mainWIndow extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Vector Drawing Application");
         this.setResizable(false);
-       this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         //this.drawingArea.setSize(new Dimension(this.drawingArea.getWidth(),this.drawingArea.getHeight()));
         // this.setSize(new Dimension(835, 445));
         this.setVisible(true);
@@ -37,19 +38,18 @@ public class mainWIndow extends javax.swing.JFrame {
 
     }
 
-private void updateBoundaryLabels() {
-    String boundaryText1 = "Welcome to برنامج الرسام \n";
-    this.welcomeLabel2.setText("The allowed drawing boundaries are from");
-    this.welcomeLabel1.setText(boundaryText1);
+    private void updateBoundaryLabels() {
+        String boundaryText1 = "Welcome to برنامج الرسام \n";
+        this.welcomeLabel2.setText("The allowed drawing boundaries are from");
+        this.welcomeLabel1.setText(boundaryText1);
 
-    int xStart = 0;
-    int yStart = 0;
-    int xEnd = drawingArea.getWidth() - 1;
-    int yEnd = drawingArea.getHeight() - 1;
+        int xStart = 0;
+        int yStart = 0;
+        int xEnd = drawingArea.getWidth() - 1;
+        int yEnd = drawingArea.getHeight() - 1;
 
-    this.welcomeLabel.setText("(" + xStart + "," + yStart + ") (top left) to (" + xEnd + "," + yEnd + ")");
-}
-
+        this.welcomeLabel.setText("(" + xStart + "," + yStart + ") (top left) to (" + xEnd + "," + yEnd + ")");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -246,12 +246,9 @@ private void updateBoundaryLabels() {
     }//GEN-LAST:event_drawLineSegmentActionPerformed
 
     private void ShapeChooserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShapeChooserComboBoxActionPerformed
-        {
+        
             if (ShapeChooserComboBox.getSelectedIndex() == 0) {
-                ShapeChooserComboBox.setSelectedIndex(-1);
-            } else {
                 ShapeChooserComboBox.removeItem("Select an option...");
-            }
         }
     }//GEN-LAST:event_ShapeChooserComboBoxActionPerformed
 
@@ -295,6 +292,31 @@ private void updateBoundaryLabels() {
             }
         });
     }
+
+    public void bindShapesToComboBox() {
+    Shape[] shapesArray = this.engine.getShapes();  
+    
+    ShapeChooserComboBox.removeAllItems();
+
+    int circleCount = 1;
+    int rectangleCount = 1;
+    int lineSegmentCount = 1;
+
+    for (Shape shape : shapesArray) {
+        String shapeName = shape.getClass().getSimpleName();        
+        String displayName = "";
+        if (shapeName.equals("Circle")) {
+            displayName = "Circle " + circleCount++;
+        } else if (shapeName.equals("Rectangle")) {
+            displayName = "Rectangle " + rectangleCount++;
+        } else if (shapeName.equals("LineSegment")) {
+            displayName = "LineSegment " + lineSegmentCount++;
+        }
+        ShapeChooserComboBox.addItem(displayName);
+    }
+}
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ShapeChooserComboBox;

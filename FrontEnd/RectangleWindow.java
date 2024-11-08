@@ -24,6 +24,7 @@ static mainWIndow parent;
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        this.setTitle("Rectangle");
     }
 
     /**
@@ -174,6 +175,8 @@ static mainWIndow parent;
             Rectangle r = new Rectangle(topLeftPoint, bottomRightPoint, properties, Color.BLACK, stroke);
             parent.engine.addShape(r);
             parent.repaint();
+            
+                parent.bindShapesToComboBox();
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Please input all required fields", "Insufficient fields", JOptionPane.ERROR_MESSAGE);
