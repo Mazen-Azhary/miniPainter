@@ -18,16 +18,16 @@ import javax.swing.text.Position;
  * @author Mazen
  */
 public class LineSegment implements Shape{
-    Point startingP;
-    Point EndingP;
-    Map<String,Double> properties;
-    Color color;
-    Stroke stroke;
+    private Point startingP;
+    private Point EndingP;
+    private Map<String,Double> properties;
+    private Color color;
+    private Stroke stroke;
  public void setPosition(Point startingP,Point EndingP){
  this.startingP=startingP;
  this.EndingP=EndingP;
  }
- public void setProperties(Map<String,Double> properties){
+ public void setProperties(Map<String,Double> properties){//slope,length,angle
  this.properties=properties;
  }
  
@@ -51,7 +51,7 @@ public class LineSegment implements Shape{
         this.EndingP = EndingP;
         this.properties = properties;
         this.color = color;
-        this.stroke=new BasicStroke(stroke);
+        this.stroke=new BasicStroke(stroke);        
     }
     
     

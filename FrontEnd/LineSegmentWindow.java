@@ -6,12 +6,9 @@ package FrontEnd;
 
 import Backend.LineSegment;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Point;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -147,7 +144,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
         String x1 = x1Text.getText().trim().replace("\n", "");
         String x2 = x2Field.getText().trim().replace("\n", "");
         String y1 = y1Field.getText().trim().replace("\n", "");
-        String y2 = StrokeText.getText().trim().replace("\n", "");
+        String y2 = y2Field.getText().trim().replace("\n", "");
 
         if (!x1.isEmpty() && !x2.isEmpty() && !y1.isEmpty() && !y2.isEmpty()) {
             try {
@@ -156,7 +153,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                 int x2Value = Integer.parseInt(x2);
                 int y2Value = Integer.parseInt(y2);
                 float stroke;
-                if (StrokeText.getText().trim().isEmpty()) {
+                if (StrokeText.getText().isEmpty()) {
                     stroke = 2; // default stroke value if not specefied
                 } else {
                     try {
