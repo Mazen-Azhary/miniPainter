@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -30,16 +31,28 @@ public class mainWIndow extends javax.swing.JFrame {
         int x = (screenSize.width - this.getWidth()) / 2;
         int y = (screenSize.height - this.getHeight()) / 2;
         setLocation(x, y);
-        String boundaryText1 = "Welcome to برنامج الرسام \n";
-
-        this.welcomeLabel2.setText("The allowed drawing boundaries are from");
-        this.welcomeLabel1.setText(boundaryText1);
-        this.welcomeLabel.setText("(0,0) (top left) to ("
-                + (drawingArea.getWidth() - 1) + ","
-                + (drawingArea.getHeight() - 1) +")");
+        //this.drawingArea.setSize(new Dimension(this.drawingArea.getWidth(),this.drawingArea.getHeight()));
+        // this.setSize(new Dimension(835, 445));
         this.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            updateBoundaryLabels();
+        });
 
     }
+
+private void updateBoundaryLabels() {
+    String boundaryText1 = "Welcome to برنامج الرسام \n";
+    this.welcomeLabel2.setText("The allowed drawing boundaries are from");
+    this.welcomeLabel1.setText(boundaryText1);
+
+    int xStart = 0;
+    int yStart = 0;
+    int xEnd = drawingArea.getWidth() - 1;
+    int yEnd = drawingArea.getHeight() - 1;
+
+    this.welcomeLabel.setText("(" + xStart + "," + yStart + ") (top left) to (" + xEnd + "," + yEnd + ")");
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,10 +131,15 @@ public class mainWIndow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         drawCircle.setText("Circle");
+        drawCircle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drawCircleActionPerformed(evt);
+            }
+        });
 
         drawLineSegment.setText("Line Segment");
         drawLineSegment.addActionListener(new java.awt.event.ActionListener() {
@@ -195,19 +213,17 @@ public class mainWIndow extends javax.swing.JFrame {
                         .addGap(18, 262, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(103, 103, 103))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(drawingArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(drawingArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(drawingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(drawingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -239,6 +255,11 @@ public class mainWIndow extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_ShapeChooserComboBoxActionPerformed
+
+    private void drawCircleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawCircleActionPerformed
+        CircleWindow c = new CircleWindow(this);
+        c.setVisible(true);
+    }//GEN-LAST:event_drawCircleActionPerformed
 
     /**
      * @param args the command line arguments
