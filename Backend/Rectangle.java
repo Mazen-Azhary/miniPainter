@@ -18,13 +18,13 @@ import java.util.Map;
  * @author Mazen
  */
 public class Rectangle implements Shape{
-    private Point topLeftPoint;
-    private Point bottomRightPoint;
-    private int width;
-    private int height;
-    private Color color;
-    private Map<String, Double> properties;
-    private Stroke stroke;
+    protected Point topLeftPoint;
+    protected Point bottomRightPoint;
+    protected int width;
+    protected int height;
+    protected Color color;
+    protected Map<String, Double> properties;
+    protected Stroke stroke;
 
     public Rectangle(Point topLeftPoint, Point bottomRightPoint, Map<String, Double> properties, Color color, float stroke) {
         this.topLeftPoint = topLeftPoint;
@@ -34,9 +34,13 @@ public class Rectangle implements Shape{
         this.stroke = new BasicStroke(stroke);
 
         // Extract width and height from properties
+        try{
         this.width = properties.get("Width").intValue();
         this.height = properties.get("Height").intValue();
-    }
+        }catch(Exception e){
+        
+        }
+        }
 
     public void setPosition(Point startingP, Point endingP) {
         this.topLeftPoint = startingP;
@@ -50,9 +54,15 @@ public class Rectangle implements Shape{
     @Override
     public void setProperties(Map<String, Double> properties) {
         this.properties = properties;
+        try{
         this.width = properties.get("Width").intValue();
         this.height = properties.get("Height").intValue();
-    }
+        }
+        catch(Exception e){
+        this.width=this.height=properties.get("Side Length").intValue();
+        
+        }
+        }
 
     @Override
     public Map<String, Double> getProperties() {

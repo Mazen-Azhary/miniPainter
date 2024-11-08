@@ -232,7 +232,8 @@ private void updateBoundaryLabels() {
     }//GEN-LAST:event_drawRectActionPerformed
 
     private void drawSquareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawSquareActionPerformed
-        // TODO add your handling code here:
+        SquareWindow w = new SquareWindow(this);
+        w.setVisible(true);
     }//GEN-LAST:event_drawSquareActionPerformed
 
     public JPanel getDrawingArea() {
