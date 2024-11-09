@@ -31,6 +31,7 @@ public class LineSegment extends Shape {
     public void draw(java.awt.Graphics canvas) {
         Graphics2D g2d = (Graphics2D) canvas;
         g2d.setColor(color);
+        g2d.setStroke(stroke);
         g2d.drawLine(topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.x);
     }
 

@@ -54,8 +54,9 @@ public class Rectangle extends Shape {
     }
 
     public void draw(Graphics canvas) {
-        Graphics g2d = (Graphics2D) canvas;
+        Graphics2D g2d = (Graphics2D) canvas;
         g2d.setColor(color);
+        g2d.setStroke(stroke);
         if (fill) {
             g2d.fillRect(topLeftPoint.x, topLeftPoint.y, width, height);
         } else {

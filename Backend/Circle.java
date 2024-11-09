@@ -24,6 +24,7 @@ public class Circle extends Shape {
         this.radius = radius;
         super(new Point((int) (centre.x - radius), (int) (centre.y - radius)), new Point((int) (centre.x + radius), (int) (centre.y + radius)), Color.BLACK, stroke);
         this.properties = properties;
+        
     }
 
     public void setPosition(Point startingP, Point EndingP) {
@@ -34,9 +35,9 @@ public class Circle extends Shape {
 
     
     public void draw(Graphics canvas) {
-        Graphics g2d = (Graphics2D) canvas;
+        Graphics2D g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-
+        g2d.setStroke(this.stroke);
         if (fill) {
             g2d.fillOval(topLeftPoint.x, topLeftPoint.y, (int) radius, (int) radius);
         } else
