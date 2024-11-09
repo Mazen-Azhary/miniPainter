@@ -16,86 +16,53 @@ import java.util.Map;
  *
  * @author Mazen
  */
-public class Rectangle implements Shape{
-    protected Point topLeftPoint;
-    protected Point bottomRightPoint;
+public class Rectangle extends Shape {
+
     protected int width;
     protected int height;
-    protected Color color;
-    protected Map<String, Double> properties;
-    protected Stroke stroke;
-    protected boolean fill;
 
     public Rectangle(Point topLeftPoint, Point bottomRightPoint, Map<String, Double> properties, Color color, float stroke) {
-        this.topLeftPoint = topLeftPoint;
-        this.bottomRightPoint = bottomRightPoint;
-        this.properties = properties;
-        this.color = color;
-        this.stroke = new BasicStroke(stroke);
+        super(topLeftPoint, bottomRightPoint, color, stroke);
 
-        // Extract width and height from properties
-        try{
-        this.width = properties.get("Width").intValue();
-        this.height = properties.get("Height").intValue();
-        }catch(Exception e){
-        
+        try {
+            this.width = properties.get("Width").intValue();
+            this.height = properties.get("Height").intValue();
+        } catch (Exception e) {
+            
+            this.width=this.height=50;
+            
         }
-        }
+    }
 
     public void setPosition(Point startingP, Point endingP) {
         this.topLeftPoint = startingP;
         this.bottomRightPoint = endingP;
-
-        // Update width and height
         this.width = Math.abs(endingP.x - startingP.x);
         this.height = Math.abs(endingP.y - startingP.y);
     }
 
     @Override
-    public void setProperties(Map<String, Double> properties) {
+    public void setProperties(Map<String, Double> properties) { 
         this.properties = properties;
-        try{
-        this.width = properties.get("Width").intValue();
-        this.height = properties.get("Height").intValue();
-        }
-        catch(Exception e){
-        this.width=this.height=properties.get("Side Length").intValue();
-        
-        }
-        }
+        try {
+            this.width = properties.get("Width").intValue();
+            this.height = properties.get("Height").intValue();
+        } catch (Exception e) {
+            this.width = this.height = properties.get("Side Length").intValue();
 
-    @Override
-    public Map<String, Double> getProperties() {
-        return this.properties;
-    }
-
-    @Override
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    @Override
-    public Color getColor() {
-        return this.color;
+        }
     }
 
     public void draw(Graphics canvas) {
         Graphics g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        if(fill){
+        if (fill) {
             g2d.fillRect(topLeftPoint.x, topLeftPoint.y, width, height);
-        }
-        else
+        } else {
             g2d.drawRect(topLeftPoint.x, topLeftPoint.y, width, height);
-        
-    }
-    
-    public void setFill(boolean fill){
-        this.fill=fill;
+        }
 
     }
-    public boolean isFilled(){
-        return this.fill;
-    }
+
 
 }

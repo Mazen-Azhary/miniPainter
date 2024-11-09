@@ -153,7 +153,7 @@ public class CircleWindow extends javax.swing.JFrame {
                 properties.put("Radius", radius * 1.0);
                 properties.put("X-Centre", x * 1.0);
                 properties.put("Y-Centre", y * 1.0);
-                Circle c = new Circle(new Point(x, y), radius * 1.0, properties);
+                Circle c = new Circle(new Point(x, y), radius * 1.0, properties,stroke);
                 parent.engine.addShape(c);
                 parent.repaint();
                 parent.bindShapesToComboBox();

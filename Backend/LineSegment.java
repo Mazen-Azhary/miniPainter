@@ -4,63 +4,38 @@
  */
 package Backend;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Stroke;
 import java.util.Map;
 
 /**
  *
  * @author Mazen
  */
-public class LineSegment implements Shape{
-    private Point startingP;
-    private Point EndingP;
-    private Map<String,Double> properties;
-    private Color color;
-    private Stroke stroke;
-    private boolean fill;
-    
- public void setPosition(Point startingP,Point EndingP){
- this.startingP=startingP;
- this.EndingP=EndingP;
- }
- public void setProperties(Map<String,Double> properties){//slope,length,angle
- this.properties=properties;
- }
- 
-    public Map<String,Double> getProperties(){
-    return this.properties;
-    
-    }
-    public void setColor(Color color){
-    this.color=color;
-    }
-    public Color getColor(){    
-    return this.color;
-    }
-    public void draw(java.awt.Graphics canvas){
-    Graphics2D g2d= (Graphics2D) canvas;
-    g2d.setColor(color);
-   g2d.drawLine(startingP.x,startingP.y,EndingP.x,EndingP.x);
+public class LineSegment extends Shape {
+
+    public void setPosition(Point startingP, Point EndingP) {
+        this.topLeftPoint = startingP;
+        this.bottomRightPoint = EndingP;
     }
 
-    public LineSegment(Point startingP, Point EndingP, Map<String, Double> properties, Color color,float stroke) {
-        this.startingP = startingP;
-        this.EndingP = EndingP;
+    public void setProperties(Map<String, Double> properties) {//slope,length,angle
         this.properties = properties;
-        this.color = color;
-        this.stroke=new BasicStroke(stroke);        
+    }
+
+    public LineSegment(Point startingP, Point EndingP, Map<String, Double> properties, Color color, float stroke) {
+        super(startingP, EndingP, color, stroke);
+    }
+
+    public void draw(java.awt.Graphics canvas) {
+        Graphics2D g2d = (Graphics2D) canvas;
+        g2d.setColor(color);
+        g2d.drawLine(topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.x);
     }
 
     public boolean isFilled() {//it's always filled
         return true;
     }
-    
-    public void setFill(boolean fill){
-    this.fill=fill;
-    }
-    
+
 }
