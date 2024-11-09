@@ -159,7 +159,7 @@ static mainWIndow parent;
                 stroke = 2; // default stroke value
             } else {
                 try {
-                    stroke = Float.parseFloat(this.stroke.getText().trim());
+                    stroke = Math.abs(Float.parseFloat(this.stroke.getText().trim()));
                 } catch (NumberFormatException e) {
                     stroke = 2;
                 }

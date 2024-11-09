@@ -24,6 +24,7 @@ public class Rectangle implements Shape{
     protected Color color;
     protected Map<String, Double> properties;
     protected Stroke stroke;
+    protected boolean fill;
 
     public Rectangle(Point topLeftPoint, Point bottomRightPoint, Map<String, Double> properties, Color color, float stroke) {
         this.topLeftPoint = topLeftPoint;
@@ -81,8 +82,20 @@ public class Rectangle implements Shape{
     public void draw(Graphics canvas) {
         Graphics g2d = (Graphics2D) canvas;
         g2d.setColor(color);
+        if(fill){
+            g2d.fillRect(topLeftPoint.x, topLeftPoint.y, width, height);
+        }
+        else
             g2d.drawRect(topLeftPoint.x, topLeftPoint.y, width, height);
         
     }
     
+    public void setFill(boolean fill){
+        this.fill=fill;
+
+    }
+    public boolean isFilled(){
+        return this.fill;
+    }
+
 }

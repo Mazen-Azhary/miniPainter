@@ -2,6 +2,7 @@ package FrontEnd;
 
 import Backend.Shape;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import javax.swing.JOptionPane;
 
 /**
@@ -117,10 +118,20 @@ public class ColorChooser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a valid color.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        
-        
-    }
+
+        try {
+            ShapeToChange.setFill(true);
+            ShapeToChange.setColor(colorArray[selectedIndex]);
+            parent.repaint();
+            JOptionPane.showMessageDialog(this, "Color successfully applied!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Failed to apply color,please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+    
+        }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

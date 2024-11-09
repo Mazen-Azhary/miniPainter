@@ -21,6 +21,8 @@ public class LineSegment implements Shape{
     private Map<String,Double> properties;
     private Color color;
     private Stroke stroke;
+    private boolean fill;
+    
  public void setPosition(Point startingP,Point EndingP){
  this.startingP=startingP;
  this.EndingP=EndingP;
@@ -52,7 +54,13 @@ public class LineSegment implements Shape{
         this.color = color;
         this.stroke=new BasicStroke(stroke);        
     }
+
+    public boolean isFilled() {//it's always filled
+        return true;
+    }
     
-    
+    public void setFill(boolean fill){
+    this.fill=fill;
+    }
     
 }

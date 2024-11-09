@@ -144,7 +144,7 @@ public class CircleWindow extends javax.swing.JFrame {
                     stroke = 2; // default stroke value if not specefied
                 } else {
                     try {
-                        stroke = Float.parseFloat(StrokeText.getText().trim());
+                        stroke = Math.abs(Float.parseFloat(StrokeText.getText().trim()));
                     } catch (NumberFormatException e) {
                         stroke = 2;
                     }

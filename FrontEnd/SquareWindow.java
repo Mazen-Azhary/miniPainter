@@ -132,7 +132,7 @@ public class SquareWindow extends javax.swing.JFrame {
                     stroke = 2; // default stroke value
                 } else {
                     try {
-                        stroke = Float.parseFloat(this.jTextField4.getText().trim());
+                        stroke =Math.abs(Float.parseFloat(this.jTextField4.getText().trim()));
                     } catch (NumberFormatException e) {
                         stroke = 2;
                     }

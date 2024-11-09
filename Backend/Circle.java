@@ -23,6 +23,7 @@ public class Circle implements Shape {
     private Point centre;
     private Color color;
     private Map<String, Double> properties = new HashMap<>();
+    private boolean fill;
 
     public Circle(Point centre, double radius, Map<String, Double> properties) {
         this.centre = centre;
@@ -58,8 +59,19 @@ public class Circle implements Shape {
     public void draw(Graphics canvas) {
         Graphics g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        g2d.drawOval(topLeft.x, topLeft.y, (int) radius, (int) radius);
-        
+
+        if (fill) {
+            g2d.fillOval(topLeft.x, topLeft.y, (int) radius, (int) radius);
+        } else
+            g2d.drawOval(topLeft.x, topLeft.y, (int) radius, (int) radius);
+
     }
 
+    public boolean isFilled() {
+        return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
 }
