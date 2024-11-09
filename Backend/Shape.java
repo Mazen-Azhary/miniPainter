@@ -20,6 +20,6 @@ public interface Shape {
     public Map<String,Double> getProperties();
     public void setColor(Color color);
     public Color getColor();
-    public void draw(java.awt.Graphics canvas,int choice);
+    public void draw(java.awt.Graphics canvas);
     
 }

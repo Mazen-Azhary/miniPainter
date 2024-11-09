@@ -55,15 +55,11 @@ public class Circle implements Shape {
         return this.color;
     }
 
-    public void draw(Graphics canvas, int choice) {
+    public void draw(Graphics canvas) {
         Graphics g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        if (choice == 0) {
-            g2d.drawOval(topLeft.x, topLeft.y, (int) radius, (int) radius);
-        } else {
-
-            g2d.fillOval(topLeft.x, topLeft.y, (int) radius, (int) radius);
-        }
+        g2d.drawOval(topLeft.x, topLeft.y, (int) radius, (int) radius);
+        
     }
 
 }

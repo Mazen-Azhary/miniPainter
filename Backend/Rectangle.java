@@ -78,15 +78,11 @@ public class Rectangle implements Shape{
         return this.color;
     }
 
-    public void draw(Graphics canvas, int choice) {
+    public void draw(Graphics canvas) {
         Graphics g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        if (choice == 0) {
             g2d.drawRect(topLeftPoint.x, topLeftPoint.y, width, height);
-        } else {
-            
-            g2d.fillRect(topLeftPoint.x, topLeftPoint.y, width, height);
-        }
+        
     }
     
 }
