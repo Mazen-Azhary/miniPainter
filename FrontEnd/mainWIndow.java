@@ -43,13 +43,10 @@ public class mainWIndow extends javax.swing.JFrame {
         String boundaryText1 = "Welcome to برنامج الرسام \n";
         this.welcomeLabel2.setText("The allowed drawing boundaries are from");
         this.welcomeLabel1.setText(boundaryText1);
-
-        int xStart = 0;
-        int yStart = 0;
         int xEnd = drawingArea.getWidth() - 1;
         int yEnd = drawingArea.getHeight() - 1;
 
-        this.welcomeLabel.setText("(" + xStart + "," + yStart + ") (top left) to (" + xEnd + "," + yEnd + ")");
+        this.welcomeLabel.setText("(" + 0 + "," + 0 + ") (top left) to (" + xEnd + "," + yEnd + ")");
     }
 
     /**
@@ -294,7 +291,7 @@ public class mainWIndow extends javax.swing.JFrame {
     }//GEN-LAST:event_shapeDeleterButtonActionPerformed
 
     private void colorizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeButtonActionPerformed
-        ColorChooser c = new ColorChooser(this, ShapeChooserComboBox.getSelectedIndex());
+        ColorChooser c = new ColorChooser(this, engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()]);
         c.setVisible(true);
     }//GEN-LAST:event_colorizeButtonActionPerformed
 
@@ -342,9 +339,12 @@ public class mainWIndow extends javax.swing.JFrame {
     int circleCount = 1;
     int rectangleCount = 1;
     int lineSegmentCount = 1;
+    int squareCount = 1;
 
     for (Shape shape : shapesArray) {
-        String shapeName = shape.getClass().getSimpleName();        
+        String shapeName = shape.getClass().getSimpleName();
+
+        
         String displayName = "";
         if (shapeName.equals("Circle")) {
             displayName = "Circle " + circleCount++;
@@ -352,6 +352,9 @@ public class mainWIndow extends javax.swing.JFrame {
             displayName = "Rectangle " + rectangleCount++;
         } else if (shapeName.equals("LineSegment")) {
             displayName = "LineSegment " + lineSegmentCount++;
+        }else if (shapeName.equals("Square")){
+            displayName = "Square " + squareCount++;
+        
         }
         ShapeChooserComboBox.addItem(displayName);
     }

@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Stroke;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -79,12 +78,15 @@ public class Rectangle implements Shape{
         return this.color;
     }
 
-    @Override
-    public void draw(Graphics canvas) {
-        Graphics2D g2d = (Graphics2D) canvas;
-        g2d.setStroke(stroke);
+    public void draw(Graphics canvas, int choice) {
+        Graphics g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        g2d.drawRect(topLeftPoint.x, topLeftPoint.y, width, height);
+        if (choice == 0) {
+            g2d.drawRect(topLeftPoint.x, topLeftPoint.y, width, height);
+        } else {
+            
+            g2d.fillRect(topLeftPoint.x, topLeftPoint.y, width, height);
+        }
     }
     
 }

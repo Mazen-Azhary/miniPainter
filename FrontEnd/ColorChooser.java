@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Backend.Shape;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -8,20 +9,20 @@ import javax.swing.JOptionPane;
  */
 public class ColorChooser extends javax.swing.JFrame {
     private static mainWIndow parent;
-    private static int ShapeToChangeIndex;
-    private static final Color[] colorArray = {
+    private static Shape ShapeToChange;
+    private static Color[] colorArray = {
         Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.BLACK, Color.MAGENTA 
     };
-    private static final String[] colorNames = {
+    private static String[] colorNames = {
         "Red", "Green", "Blue", "Yellow", "Orange", "Black", "Magenta"
     };
 
     /**
      * Creates new form ColorChooser
      */
-    public ColorChooser(mainWIndow parent, int ShapeToChangeIndex) {
+    public ColorChooser(mainWIndow parent, Shape ShapeToChange) {
         this.setTitle("Color Chooser");
-        this.ShapeToChangeIndex = ShapeToChangeIndex;
+        this.ShapeToChange = ShapeToChange;
         this.parent = parent;
         initComponents();
         setLocationRelativeTo(null);
@@ -100,25 +101,31 @@ public class ColorChooser extends javax.swing.JFrame {
         }
 
         try {
-            parent.engine.getShapes()[ShapeToChangeIndex].setColor(colorArray[selectedIndex]);
+            ShapeToChange.setColor(colorArray[selectedIndex]);
             parent.repaint();
-
             JOptionPane.showMessageDialog(this, "Color successfully applied!", "Success", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
-            parent.repaint();  
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Failed to apply color. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     private void colorFillButtonActionPerformed(java.awt.event.ActionEvent evt){
-    
-    
+     int selectedIndex = colorChooser.getSelectedIndex();
+
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a valid color.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+        
     }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ColorChooser(parent, ShapeToChangeIndex).setVisible(true);  // Example index, update as needed
+                new ColorChooser(parent, ShapeToChange).setVisible(true); 
             }
         });
     }

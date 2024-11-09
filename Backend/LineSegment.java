@@ -43,6 +43,7 @@ public class LineSegment implements Shape{
     }
     public void draw(java.awt.Graphics canvas){
     Graphics2D g2d= (Graphics2D) canvas;
+    g2d.setColor(color);
    g2d.drawLine(startingP.x,startingP.y,EndingP.x,EndingP.x);
     }
 
