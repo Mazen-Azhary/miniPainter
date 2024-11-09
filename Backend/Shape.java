@@ -14,12 +14,13 @@ import java.util.Map;
  *
  * @author Mazen
  */
-public interface Shape {
+public interface Shape  {
     public void setPosition(Point startingP,Point EndingP);
     public void setProperties(Map<String,Double> properties);
     public Map<String,Double> getProperties();
     public void setColor(Color color);
     public Color getColor();
     public void draw(java.awt.Graphics canvas);
-    
+    public void setFill(boolean fill);
+    public boolean isFilled();
 }

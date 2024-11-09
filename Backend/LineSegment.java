@@ -6,12 +6,10 @@ package Backend;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Stroke;
 import java.util.Map;
-import javax.swing.text.Position;
 
 /**
  *
@@ -23,6 +21,8 @@ public class LineSegment implements Shape{
     private Map<String,Double> properties;
     private Color color;
     private Stroke stroke;
+    private boolean fill;
+    
  public void setPosition(Point startingP,Point EndingP){
  this.startingP=startingP;
  this.EndingP=EndingP;
@@ -43,6 +43,7 @@ public class LineSegment implements Shape{
     }
     public void draw(java.awt.Graphics canvas){
     Graphics2D g2d= (Graphics2D) canvas;
+    g2d.setColor(color);
    g2d.drawLine(startingP.x,startingP.y,EndingP.x,EndingP.x);
     }
 
@@ -53,7 +54,13 @@ public class LineSegment implements Shape{
         this.color = color;
         this.stroke=new BasicStroke(stroke);        
     }
+
+    public boolean isFilled() {//it's always filled
+        return true;
+    }
     
-    
+    public void setFill(boolean fill){
+    this.fill=fill;
+    }
     
 }

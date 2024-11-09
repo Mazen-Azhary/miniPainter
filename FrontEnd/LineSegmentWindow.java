@@ -157,7 +157,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                     stroke = 2; // default stroke value if not specefied
                 } else {
                     try {
-                        stroke = Float.parseFloat(StrokeText.getText().trim());
+                        stroke = Math.abs(Float.parseFloat(StrokeText.getText().trim()));
                     } catch (NumberFormatException e) {
                         stroke = 2;
                     }
@@ -182,6 +182,8 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                 parent.engine.addShape(line);
                 parent.repaint();
                 // line.draw((Graphics) parent.getDrawingArea());
+                
+                parent.bindShapesToComboBox();
                 this.setVisible(false);
 
             } catch (NumberFormatException ex) {

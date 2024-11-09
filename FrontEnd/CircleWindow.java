@@ -24,8 +24,9 @@ public class CircleWindow extends javax.swing.JFrame {
     public CircleWindow(mainWIndow parent) {
         this.parent = parent;
         this.setTitle("Circle window");
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -143,7 +144,7 @@ public class CircleWindow extends javax.swing.JFrame {
                     stroke = 2; // default stroke value if not specefied
                 } else {
                     try {
-                        stroke = Float.parseFloat(StrokeText.getText().trim());
+                        stroke = Math.abs(Float.parseFloat(StrokeText.getText().trim()));
                     } catch (NumberFormatException e) {
                         stroke = 2;
                     }
@@ -155,6 +156,7 @@ public class CircleWindow extends javax.swing.JFrame {
                 Circle c = new Circle(new Point(x, y), radius * 1.0, properties);
                 parent.engine.addShape(c);
                 parent.repaint();
+                parent.bindShapesToComboBox();
                 this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(null, "please input valid numbers", "invalid entry", JOptionPane.ERROR_MESSAGE);

@@ -5,9 +5,11 @@
 package FrontEnd;
 
 import Backend.DrawerClass;
+import Backend.Shape;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -27,7 +29,7 @@ public class mainWIndow extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Vector Drawing Application");
         this.setResizable(false);
-       this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         //this.drawingArea.setSize(new Dimension(this.drawingArea.getWidth(),this.drawingArea.getHeight()));
         // this.setSize(new Dimension(835, 445));
         this.setVisible(true);
@@ -37,19 +39,15 @@ public class mainWIndow extends javax.swing.JFrame {
 
     }
 
-private void updateBoundaryLabels() {
-    String boundaryText1 = "Welcome to برنامج الرسام \n";
-    this.welcomeLabel2.setText("The allowed drawing boundaries are from");
-    this.welcomeLabel1.setText(boundaryText1);
+    private void updateBoundaryLabels() {
+        String boundaryText1 = "Welcome to برنامج الرسام \n";
+        this.welcomeLabel2.setText("The allowed drawing boundaries are from");
+        this.welcomeLabel1.setText(boundaryText1);
+        int xEnd = drawingArea.getWidth() - 1;
+        int yEnd = drawingArea.getHeight() - 1;
 
-    int xStart = 0;
-    int yStart = 0;
-    int xEnd = drawingArea.getWidth() - 1;
-    int yEnd = drawingArea.getHeight() - 1;
-
-    this.welcomeLabel.setText("(" + xStart + "," + yStart + ") (top left) to (" + xEnd + "," + yEnd + ")");
-}
-
+        this.welcomeLabel.setText("(" + 0 + "," + 0 + ") (top left) to (" + xEnd + "," + yEnd + ")");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,8 +61,8 @@ private void updateBoundaryLabels() {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         ShapeChooserComboBox = new javax.swing.JComboBox<>();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        colorizeButton = new javax.swing.JButton();
+        shapeDeleterButton = new javax.swing.JButton();
         welcomeLabel = new javax.swing.JLabel();
         welcomeLabel1 = new javax.swing.JLabel();
         welcomeLabel2 = new javax.swing.JLabel();
@@ -89,9 +87,19 @@ private void updateBoundaryLabels() {
             }
         });
 
-        jButton5.setText("Colorize");
+        colorizeButton.setText("Colorize");
+        colorizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorizeButtonActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Delete");
+        shapeDeleterButton.setText("Delete");
+        shapeDeleterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shapeDeleterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,9 +112,9 @@ private void updateBoundaryLabels() {
                         .addComponent(ShapeChooserComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(colorizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(shapeDeleterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(welcomeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,8 +134,8 @@ private void updateBoundaryLabels() {
                 .addComponent(ShapeChooserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(colorizeButton)
+                    .addComponent(shapeDeleterButton))
                 .addContainerGap(245, Short.MAX_VALUE))
         );
 
@@ -246,12 +254,9 @@ private void updateBoundaryLabels() {
     }//GEN-LAST:event_drawLineSegmentActionPerformed
 
     private void ShapeChooserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShapeChooserComboBoxActionPerformed
-        {
+        
             if (ShapeChooserComboBox.getSelectedIndex() == 0) {
-                ShapeChooserComboBox.setSelectedIndex(-1);
-            } else {
                 ShapeChooserComboBox.removeItem("Select an option...");
-            }
         }
     }//GEN-LAST:event_ShapeChooserComboBoxActionPerformed
 
@@ -259,6 +264,36 @@ private void updateBoundaryLabels() {
         CircleWindow c = new CircleWindow(this);
         c.setVisible(true);
     }//GEN-LAST:event_drawCircleActionPerformed
+
+    private void shapeDeleterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shapeDeleterButtonActionPerformed
+    int selectedIndex = ShapeChooserComboBox.getSelectedIndex()+1;
+
+    if (selectedIndex < 0) { 
+        JOptionPane.showMessageDialog(this, "Please select a valid shape to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int shapeIndex = selectedIndex - 1;
+
+    try {
+        engine.removeShape(engine.getShapes()[shapeIndex]);
+
+        bindShapesToComboBox();
+
+        JOptionPane.showMessageDialog(this, "Shape successfully deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        repaint();
+    } catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
+        JOptionPane.showMessageDialog(this, "Failed to delete shape. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+}
+
+        
+    }//GEN-LAST:event_shapeDeleterButtonActionPerformed
+
+    private void colorizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeButtonActionPerformed
+        ColorChooser c = new ColorChooser(this, engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()]);
+        c.setVisible(true);
+    }//GEN-LAST:event_colorizeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,18 +331,49 @@ private void updateBoundaryLabels() {
         });
     }
 
+    public void bindShapesToComboBox() {
+    Shape[] shapesArray = this.engine.getShapes();  
+    
+    ShapeChooserComboBox.removeAllItems();
+
+    int circleCount = 1;
+    int rectangleCount = 1;
+    int lineSegmentCount = 1;
+    int squareCount = 1;
+
+    for (Shape shape : shapesArray) {
+        String shapeName = shape.getClass().getSimpleName();
+
+        
+        String displayName = "";
+        if (shapeName.equals("Circle")) {
+            displayName = "Circle " + circleCount++;
+        } else if (shapeName.equals("Rectangle")) {
+            displayName = "Rectangle " + rectangleCount++;
+        } else if (shapeName.equals("LineSegment")) {
+            displayName = "LineSegment " + lineSegmentCount++;
+        }else if (shapeName.equals("Square")){
+            displayName = "Square " + squareCount++;
+        
+        }
+        ShapeChooserComboBox.addItem(displayName);
+    }
+}
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ShapeChooserComboBox;
+    private javax.swing.JButton colorizeButton;
     private javax.swing.JButton drawCircle;
     private javax.swing.JButton drawLineSegment;
     private javax.swing.JButton drawRect;
     private javax.swing.JButton drawSquare;
     private javax.swing.JPanel drawingArea;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton shapeDeleterButton;
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JLabel welcomeLabel1;
     private javax.swing.JLabel welcomeLabel2;
