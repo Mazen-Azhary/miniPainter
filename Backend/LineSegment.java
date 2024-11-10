@@ -29,7 +29,7 @@ public class LineSegment extends Shape {
         Graphics2D g2d = (Graphics2D) canvas;
         g2d.setColor(color);
         g2d.setStroke(stroke);
-        g2d.drawLine(topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.x);
+        g2d.drawLine(topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y);
     }
 
     public boolean isFilled() {//it's always filled

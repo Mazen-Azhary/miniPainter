@@ -36,18 +36,19 @@ public class mainWIndow extends javax.swing.JFrame {
         SwingUtilities.invokeLater(() -> {
             updateBoundaryLabels();
         });
+        
 
     }
 
     private void updateBoundaryLabels() {
-        String boundaryText1 = "Welcome to برنامج الرسام \n";
-        this.welcomeLabel2.setText("The allowed drawing boundaries are from");
-        this.welcomeLabel1.setText(boundaryText1);
-        int xEnd = drawingArea.getWidth() - 1;
-        int yEnd = drawingArea.getHeight() - 1;
+    int Width = this.drawingArea.getWidth();
+    int Height = this.drawingArea.getHeight();
+    String boundaryText1 = "Welcome to برنامج الرسام \n";
+    this.welcomeLabel2.setText("The allowed drawing boundaries are from");
+    this.welcomeLabel1.setText(boundaryText1);
+    this.welcomeLabel.setText("(0,0) (top left) to (" + (Width - 1) + "," + (Height - 1) + ")");
+}
 
-        this.welcomeLabel.setText("(" + 0 + "," + 0 + ") (top left) to (" + xEnd + "," + yEnd + ")");
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,7 +119,7 @@ public class mainWIndow extends javax.swing.JFrame {
                         .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(welcomeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,11 +201,11 @@ public class mainWIndow extends javax.swing.JFrame {
         drawingArea.setLayout(drawingAreaLayout);
         drawingAreaLayout.setHorizontalGroup(
             drawingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 856, Short.MAX_VALUE)
         );
         drawingAreaLayout.setVerticalGroup(
             drawingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 436, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,14 +214,12 @@ public class mainWIndow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 262, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(103, 103, 103))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(drawingArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(drawingArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,8 +227,10 @@ public class mainWIndow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(drawingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(drawingArea, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        drawingArea.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
