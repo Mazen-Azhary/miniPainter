@@ -144,7 +144,7 @@ public class ColorChooser extends javax.swing.JFrame {
     // Variables declaration
     private javax.swing.JComboBox<String> colorChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton submitColor;
+    private javax.swing.JButton submitColor;    
     private javax.swing.JButton colorFillButton;
     // End of variables declaration
 }

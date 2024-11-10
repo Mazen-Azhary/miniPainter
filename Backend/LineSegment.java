@@ -15,10 +15,7 @@ import java.util.Map;
  */
 public class LineSegment extends Shape {
 
-    public void setPosition(Point startingP, Point EndingP) {
-        this.topLeftPoint = startingP;
-        this.bottomRightPoint = EndingP;
-    }
+    
 
     public void setProperties(Map<String, Double> properties) {//slope,length,angle
         this.properties = properties;
