@@ -174,11 +174,24 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                     slope = Double.POSITIVE_INFINITY;
                 }
 
-                properties.put("Length", length);
+                LineSegment line = new LineSegment(new Point(x1Value, y1Value), new Point(x2Value, y2Value), properties, Color.BLACK, stroke);
+                
+                
+                line.getProperties().put("startingX", x1 * 1.0);
+                shapeToEdit.getProperties().put("startingY", y1 * 1.0);
+                shapeToEdit.getProperties().put("endingX", x2 * 1.0);
+                shapeToEdit.getProperties().put("endingY", y2 * 1.0);
+                try {
+                    shapeToEdit.getProperties().put("slope", (y2 - y1) / (x2 - x1) * 1.0);
+                } catch (ArithmeticException e) {
+                    shapeToEdit.getProperties().put("slope", Double.MAX_VALUE);
+                }
+                
+                
+                properties.put("ength", length);
                 properties.put("Angle", angle);
                 properties.put("Slope", slope);
 
-                LineSegment line = new LineSegment(new Point(x1Value, y1Value), new Point(x2Value, y2Value), properties, Color.BLACK, stroke);
                 parent.engine.addShape(line);
                 parent.repaint();
                 // line.draw((Graphics) parent.getDrawingArea());

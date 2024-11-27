@@ -41,10 +41,7 @@ public abstract class Shape implements ShapeInterface {
     
     }
     
-    public void setProperties(Map<String, Double> properties) {
-        this.properties = properties;
-
-    }
+    public abstract void setProperties(Map<String, Double> properties);
 
     public Map<String, Double> getProperties() {
 
@@ -69,4 +66,10 @@ public abstract class Shape implements ShapeInterface {
     public boolean isFilled() {
         return this.fill;
     }
+    
+    public Point[] getPosition(Point start,Point end){
+        Point[] p = {this.topLeftPoint,this.bottomRightPoint};
+        return p;        
+    }
+    
 }

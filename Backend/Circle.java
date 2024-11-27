@@ -23,7 +23,13 @@ public class Circle extends Shape {
         this.centre = centre;
         this.radius = radius;
         super(new Point((int) (centre.x - radius), (int) (centre.y - radius)), new Point((int) (centre.x + radius), (int) (centre.y + radius)), Color.BLACK, stroke);
-        this.properties = properties;
+        this.properties.put("radius", radius);
+        Double centreX = centre.x*1.0;
+       Double centreY = centre.y*1.0;
+       this.properties.put("centreX",centreX);
+       this.properties.put("centreY",centreY);   
+       this.properties.put("stroke", stroke*1.0);
+        this.setProperties(this.properties);
         
     }
 
@@ -43,5 +49,12 @@ public class Circle extends Shape {
         } else
             g2d.drawOval(topLeftPoint.x, topLeftPoint.y, (int) radius, (int) radius);
 
+    }
+
+    
+    public void setProperties(Map<String, Double> properties) {//properties:radius,color,centre
+       
+        this.properties=properties;
+    
     }
 }

@@ -36,4 +36,6 @@ public class LineSegment extends Shape {
         return true;
     }
 
+    
+    
 }

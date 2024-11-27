@@ -4,11 +4,18 @@
  */
 package FrontEnd;
 
+import Backend.Shape;
+import java.awt.Point;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Mazen
  */
 public class ResizeLineSegmentWindow extends javax.swing.JFrame {
+
+    private static Shape shapeToEdit;
+    private static mainWIndow parent;
 
     /**
      * Creates new form ResizeLineSegmentWindow
@@ -60,7 +67,12 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
             }
         });
 
-        submitButton.setText("jButton1");
+        submitButton.setText("submitButton");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,7 +102,7 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()
                 .addGap(170, 170, 170)
-                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,16 +124,16 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(newX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel3))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(submitButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(newY2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(submitButton)
+                        .addComponent(newY2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -135,6 +147,37 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
     private void newX2TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newX2TextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newX2TextActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        String x1t = newX1Text.getText().trim().replace(" ", "").replace("\n", "");
+        String y1t = newY1Text.getText().trim().replace(" ", "").replace("\n", "");
+        String x2t = newX2Text.getText().trim().replace(" ", "".replace("\n", ""));
+        String y2t = newY2Field.getText().trim().replace(" ", "").replace("\n", "");
+
+        if (!x1t.isEmpty() && !y1t.isEmpty() && !x2t.isEmpty() && !y2t.isEmpty()) {
+            try {
+                int x1 = Integer.parseInt(x1t);
+                int x2 = Integer.parseInt(x2t);
+                int y1 = Integer.parseInt(y1t);
+                int y2 = Integer.parseInt(y2t);
+                shapeToEdit.setPosition(new Point(x1, y1), new Point(x2, y2));
+                shapeToEdit.getProperties().put("startingX", x1 * 1.0);
+                shapeToEdit.getProperties().put("startingY", y1 * 1.0);
+                shapeToEdit.getProperties().put("endingX", x2 * 1.0);
+                shapeToEdit.getProperties().put("endingY", y2 * 1.0);
+                try {
+                    shapeToEdit.getProperties().put("slope", (y2 - y1) / (x2 - x1) * 1.0);
+                } catch (ArithmeticException e) {
+                    shapeToEdit.getProperties().put("slope", Double.MAX_VALUE);
+                }
+                parent.repaint();
+                dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "please input valid numbers", "invalid entry", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
