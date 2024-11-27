@@ -4,8 +4,7 @@
  */
 package FrontEnd;
 
-import Backend.DrawerClass;
-import Backend.Shape;
+import Backend.*;
 import java.awt.Graphics;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -67,7 +66,7 @@ public class mainWIndow extends javax.swing.JFrame {
         welcomeLabel2 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        resizeButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         drawCircle = new javax.swing.JButton();
@@ -108,7 +107,12 @@ public class mainWIndow extends javax.swing.JFrame {
 
         loadButton.setText("Load");
 
-        jButton1.setText("Resize");
+        resizeButton.setText("Resize");
+        resizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resizeButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Move");
 
@@ -134,7 +138,7 @@ public class mainWIndow extends javax.swing.JFrame {
                         .addComponent(shapeDeleterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(resizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -160,7 +164,7 @@ public class mainWIndow extends javax.swing.JFrame {
                     .addComponent(shapeDeleterButton))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(resizeButton)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -303,9 +307,7 @@ public class mainWIndow extends javax.swing.JFrame {
 
     try {
         engine.removeShape(engine.getShapes()[shapeIndex]);
-
         bindShapesToComboBox();
-
         JOptionPane.showMessageDialog(this, "Shape successfully deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
         repaint();
     } catch (ArrayIndexOutOfBoundsException | NullPointerException ex) {
@@ -320,6 +322,21 @@ public class mainWIndow extends javax.swing.JFrame {
         ColorChooser c = new ColorChooser(this, engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()]);
         c.setVisible(true);
     }//GEN-LAST:event_colorizeButtonActionPerformed
+
+    private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
+        Shape shape = engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()];
+        if(shape instanceof Circle){
+        
+        
+        }else if(shape instanceof LineSegment){
+        ResizeLineSegmentWindow r = new ResizeLineSegmentWindow(shape,this);
+        r.setVisible(true);
+        }else if(shape instanceof Rectangle && !(shape instanceof Square)){
+        
+        }else if(!(shape instanceof Rectangle) && (shape instanceof Square)){
+        
+        }
+    }//GEN-LAST:event_resizeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,12 +413,12 @@ public class mainWIndow extends javax.swing.JFrame {
     private javax.swing.JButton drawRect;
     private javax.swing.JButton drawSquare;
     private javax.swing.JPanel drawingArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loadButton;
+    private javax.swing.JButton resizeButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton shapeDeleterButton;
     private javax.swing.JLabel welcomeLabel;

@@ -25,6 +25,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
     public LineSegmentWindow(mainWIndow parent) {
         this.parent = parent;
         this.setTitle("Line Segment window");
+        setResizable(false);
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -177,20 +178,20 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                 LineSegment line = new LineSegment(new Point(x1Value, y1Value), new Point(x2Value, y2Value), properties, Color.BLACK, stroke);
                 
                 
-                line.getProperties().put("startingX", x1 * 1.0);
-                shapeToEdit.getProperties().put("startingY", y1 * 1.0);
-                shapeToEdit.getProperties().put("endingX", x2 * 1.0);
-                shapeToEdit.getProperties().put("endingY", y2 * 1.0);
+                line.getProperties().put("startingX", x1Value * 1.0);
+                line.getProperties().put("startingY", y1Value * 1.0);
+                line.getProperties().put("endingX", x2Value * 1.0);
+                line.getProperties().put("endingY", y2Value * 1.0);
                 try {
-                    shapeToEdit.getProperties().put("slope", (y2 - y1) / (x2 - x1) * 1.0);
+                    line.getProperties().put("slope", (y2Value - y1Value) / (x2Value - x1Value) * 1.0);
                 } catch (ArithmeticException e) {
-                    shapeToEdit.getProperties().put("slope", Double.MAX_VALUE);
+                    line.getProperties().put("slope", Double.POSITIVE_INFINITY);
                 }
                 
                 
-                properties.put("ength", length);
-                properties.put("Angle", angle);
-                properties.put("Slope", slope);
+                properties.put("length", length);
+                properties.put("angle", angle);
+                properties.put("slope", slope);
 
                 parent.engine.addShape(line);
                 parent.repaint();

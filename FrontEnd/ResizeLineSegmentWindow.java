@@ -20,7 +20,9 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
     /**
      * Creates new form ResizeLineSegmentWindow
      */
-    public ResizeLineSegmentWindow() {
+    public ResizeLineSegmentWindow(Shape shapeToEdit,mainWIndow parent) {
+        this.shapeToEdit= shapeToEdit;
+        this.parent=parent;
         initComponents();
         setTitle("Resize Line Segment Window");
     }
@@ -209,7 +211,7 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ResizeLineSegmentWindow().setVisible(true);
+                new ResizeLineSegmentWindow(shapeToEdit,parent).setVisible(true);
             }
         });
     }
