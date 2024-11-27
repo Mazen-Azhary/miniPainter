@@ -5,6 +5,7 @@
 package FrontEnd;
 
 import Backend.Shape;
+import java.awt.Point;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +18,9 @@ private static mainWIndow parent;
     /**
      * Creates new form MoveShapeWindow
      */
-    public MoveShapeWindow(Shape ShapeToChange) {
+    public MoveShapeWindow(Shape ShapeToChange,mainWIndow parent) {
         this.ShapeToChange=ShapeToChange;
+        this.parent=parent;
         initComponents();
         setTitle("Move Shape");
         setResizable(false);
@@ -100,17 +102,17 @@ private static mainWIndow parent;
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(137, 137, 137)
                 .addComponent(moveShapeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(moveShapeButton)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -155,25 +157,17 @@ private static mainWIndow parent;
     private void moveShapeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveShapeButtonActionPerformed
         String xText = shapeNewX.getText().trim().replace(" ","");
         String yText = shapeNewY.getText().trim().replace(" ","");
-        if(!xText.isEmpty() && !yText.isEmpty()){
+        if(!(xText.isEmpty() || yText.isEmpty())){
             try{
                 int x = Integer.parseInt(xText); 
                 int y = Integer.parseInt(yText); 
-                this.ShapeToChange.setPosition(startingP, EndingP);
-                
+                this.ShapeToChange.setPosition(new Point(x, y));//overloaded method                
                 parent.repaint();
-                
-                
-            
-            }catch(Exception e){
-               JOptionPane.showMessageDialog(this, "Please enter valid numbers for all fields", "Insufficient fields", JOptionPane.ERROR_MESSAGE);
-            
-            }
-        
-        
-        
+            }catch(ArithmeticException e){
+               JOptionPane.showMessageDialog(this, "Please enter valid numbers for all fields", "Insufficient fields", JOptionPane.ERROR_MESSAGE);            
+            } 
         }else{        
-               JOptionPane.showMessageDialog(this, "Please enter valid numbers for all fields", "Insufficient fields", JOptionPane.ERROR_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Please enter all fields", "Insufficient fields", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_moveShapeButtonActionPerformed
@@ -208,7 +202,7 @@ private static mainWIndow parent;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoveShapeWindow(ShapeToChange).setVisible(true);
+                new MoveShapeWindow(ShapeToChange,parent).setVisible(true);
             }
         });
     }

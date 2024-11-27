@@ -189,7 +189,8 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                 }
                 
                 
-                properties.put("length", length);
+                properties.put("Borderlength",Math.abs(x2Value-x1Value)*1.0);
+                properties.put("Borderwidth", Math.abs(y2Value-y1Value)*1.0);
                 properties.put("angle", angle);
                 properties.put("slope", slope);
 

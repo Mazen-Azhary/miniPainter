@@ -33,8 +33,8 @@ public abstract class Shape implements ShapeInterface {
 
     public void setPosition(Point startingP) {
     this.topLeftPoint = startingP;
-    double width = getProperties().get("width");   
-    double length = getProperties().get("length"); 
+    double width = getProperties().get("Borderwidth");   
+    double length = getProperties().get("Borderlength"); 
     this.bottomRightPoint = new Point((int)(topLeftPoint.x + width),(int) (topLeftPoint.y + length));
 }
 
