@@ -143,7 +143,7 @@ public class SquareWindow extends javax.swing.JFrame {
                 parent.engine.addShape(square);
                 parent.repaint();                
                 parent.bindShapesToComboBox();
-                this.setVisible(false);
+                this.dispose();
 
             } catch (NumberFormatException e) {
 

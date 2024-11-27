@@ -23,6 +23,8 @@ public abstract class Shape implements ShapeInterface {
         this.stroke=new BasicStroke(stroke);
     }
     
+    pr double length
+    pr double width
     
     
 
@@ -31,6 +33,14 @@ public abstract class Shape implements ShapeInterface {
         this.bottomRightPoint = EndingP;
     }
 
+    @SuppressWarnings("RedundantStringConstructorCall")
+    public void setPosition(Point startingP){
+        this.topLeftPoint = startingP;
+        this.bottomRightPoint = new Point((int)getProperties().get(new String("width"))+(int)topLeftPoint.x,(int)topLeftPoint.y+(int)getProperties().get(new String("length")));
+    
+    
+    }
+    
     public void setProperties(Map<String, Double> properties) {
         this.properties = properties;
 
