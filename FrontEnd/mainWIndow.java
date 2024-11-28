@@ -32,7 +32,9 @@ public class mainWIndow extends javax.swing.JFrame {
             updateBoundaryLabels();
         });
         
-
+        engine.loadObjects();
+        bindShapesToComboBox();
+       
     }
 
     private void updateBoundaryLabels() {
@@ -102,6 +104,11 @@ public class mainWIndow extends javax.swing.JFrame {
         });
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         loadButton.setText("Load");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -147,11 +154,8 @@ public class mainWIndow extends javax.swing.JFrame {
                         .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(welcomeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(welcomeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -282,6 +286,7 @@ public class mainWIndow extends javax.swing.JFrame {
     private void drawRectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawRectActionPerformed
         RectangleWindow w = new RectangleWindow(this);
         w.setVisible(true);
+        
     }//GEN-LAST:event_drawRectActionPerformed
 
     private void drawSquareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawSquareActionPerformed
@@ -304,7 +309,6 @@ public class mainWIndow extends javax.swing.JFrame {
     }//GEN-LAST:event_drawCircleActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
-            bindShapesToComboBox();
 
         if (ShapeChooserComboBox.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(this, "Please select a valid shape", "Error", JOptionPane.ERROR_MESSAGE);
@@ -322,6 +326,7 @@ public class mainWIndow extends javax.swing.JFrame {
             MoveShapeWindow w = new MoveShapeWindow(engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()],this);
             w.setVisible(true);
             
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Failed to move shape. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -332,6 +337,8 @@ public class mainWIndow extends javax.swing.JFrame {
     }//GEN-LAST:event_moveButtonActionPerformed
 
     private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
+      
+        if(ShapeChooserComboBox.getSelectedIndex()!=-1){
         Shape shape = engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()];
         if(shape instanceof Circle){
             ResizeCircleWindow r = new ResizeCircleWindow(this, shape);
@@ -344,14 +351,21 @@ public class mainWIndow extends javax.swing.JFrame {
             ResizeRectangleWindow r = new ResizeRectangleWindow(this, shape);
             r.setVisible(true);
             
-        }else if(!(shape instanceof Rectangle) && (shape instanceof Square)){
-
+        }else if((shape instanceof Square)){
+            ResizeSquareWindow w = new ResizeSquareWindow(this, shape);
+            w.setVisible(true);
+            
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Failed to resize shape. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        
         }
 
     }//GEN-LAST:event_resizeButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        // TODO add your handling code here:
+        engine.loadObjects();
+        repaint();
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void shapeDeleterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shapeDeleterButtonActionPerformed
@@ -377,8 +391,13 @@ public class mainWIndow extends javax.swing.JFrame {
     }//GEN-LAST:event_shapeDeleterButtonActionPerformed
 
     private void colorizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeButtonActionPerformed
+      if(ShapeChooserComboBox.getSelectedIndex()!=-1){
         ColorChooser c = new ColorChooser(this, engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()]);
         c.setVisible(true);
+      }else{
+            JOptionPane.showMessageDialog(this, "Failed to colorize shape. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+      
+      }
     }//GEN-LAST:event_colorizeButtonActionPerformed
 
     private void ShapeChooserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShapeChooserComboBoxActionPerformed
@@ -387,6 +406,11 @@ public class mainWIndow extends javax.swing.JFrame {
             ShapeChooserComboBox.removeItem("Select an option...");
         }
     }//GEN-LAST:event_ShapeChooserComboBoxActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        engine.saveObjects();
+        repaint();
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments

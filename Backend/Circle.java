@@ -4,6 +4,7 @@
  */
 package Backend;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -43,7 +44,7 @@ public class Circle extends Shape {
     public void draw(Graphics canvas) {
         Graphics2D g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        g2d.setStroke(this.stroke);
+        g2d.setStroke(new BasicStroke(this.stroke));
         if (fill) {
             g2d.fillOval(topLeftPoint.x, topLeftPoint.y, (int) radius, (int) radius);
         } else

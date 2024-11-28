@@ -137,9 +137,8 @@ public class SquareWindow extends javax.swing.JFrame {
                         stroke = 2;
                     }
                 }
-                Map<String, Double> properties = new HashMap<>();
-                properties.put("Side Length", sideLength * 1.0);
-                Square square = new Square(new Point(startX, startY), sideLength, properties, Color.BLACK, stroke);
+                Square square = new Square(new Point(startX, startY), sideLength, Color.BLACK, stroke);
+                square.getProperties().put("Side Length", sideLength * 1.0);
                 parent.engine.addShape(square);
                 parent.repaint();                
                 parent.bindShapesToComboBox();

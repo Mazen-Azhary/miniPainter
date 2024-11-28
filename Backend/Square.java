@@ -9,10 +9,9 @@ import java.util.Map;
  */
 public class Square extends Rectangle {
     
-    public Square(Point topLeftPoint, double sideLength, Map<String, Double> properties, Color color, float stroke) {
-        super(topLeftPoint,new Point((int)(topLeftPoint.x + sideLength), (int)(topLeftPoint.y + sideLength)),properties,color,stroke);
-        properties.put("SideLength", sideLength);
-        this.setProperties(properties);
+    public Square(Point topLeftPoint, double sideLength, Color color, float stroke) {
+        super(topLeftPoint,new Point((int)(topLeftPoint.x + sideLength), (int)(topLeftPoint.y + sideLength)),color,stroke);
+        setDimentions((int)sideLength);
     }
 
     @Override
@@ -25,9 +24,19 @@ public class Square extends Rectangle {
 
     @Override
     public Map<String, Double> getProperties() {
-        Map<String, Double> properties = super.getProperties();
-        properties.put("SideLength", properties.get("Width")); 
         return properties;
     }
+    
+    
+    public boolean setDimentions(int len){
+    if(len<0){
+    return false;
+    }
+    this.width=this.height=len;
+    getProperties().put("SideLength",len*1.0);
+    getProperties().put("Width",len*1.0);
+    return true;
+    }
+    
 
 }

@@ -21,12 +21,13 @@ public class Rectangle extends Shape {
     protected int width;
     protected int height;
 
-    public Rectangle(Point topLeftPoint, Point bottomRightPoint, Map<String, Double> properties, Color color, float stroke) {
+    public Rectangle(Point topLeftPoint, Point bottomRightPoint,Color color, float stroke) {
         super(topLeftPoint, bottomRightPoint, color, stroke);
 
         try {
             this.width = properties.get("Width").intValue();
             this.height = properties.get("Height").intValue();
+            
         } catch (Exception e) {
             
             this.width=this.height=50;
@@ -67,7 +68,7 @@ public class Rectangle extends Shape {
     public void draw(Graphics canvas) {
         Graphics2D g2d = (Graphics2D) canvas;
         g2d.setColor(color);
-        g2d.setStroke(stroke);
+        g2d.setStroke(new BasicStroke(this.stroke));
         if (fill) {
             g2d.fillRect(topLeftPoint.x, topLeftPoint.y, width, height);
         } else {

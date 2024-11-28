@@ -182,6 +182,7 @@ public class LineSegmentWindow extends javax.swing.JFrame {
                 line.getProperties().put("startingY", y1Value * 1.0);
                 line.getProperties().put("endingX", x2Value * 1.0);
                 line.getProperties().put("endingY", y2Value * 1.0);
+                line.getProperties().put("stroke",stroke*1.0);
                 try {
                     line.getProperties().put("slope", (y2Value - y1Value) / (x2Value - x1Value) * 1.0);
                 } catch (ArithmeticException e) {

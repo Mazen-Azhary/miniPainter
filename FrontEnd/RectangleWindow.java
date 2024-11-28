@@ -165,14 +165,14 @@ static mainWIndow parent;
                 }
             }
 
-            Map<String, Double> properties = new HashMap<>();
-            properties.put("Width", widthValue * 1.0);
-            properties.put("Height", lengthValue * 1.0);
+           
 
             Point topLeftPoint = new Point(startingXValue, startingYValue);
             Point bottomRightPoint = new Point(startingXValue + widthValue, startingYValue + lengthValue);
 
-            Rectangle r = new Rectangle(topLeftPoint, bottomRightPoint, properties, Color.BLACK, stroke);
+            Rectangle r = new Rectangle(topLeftPoint, bottomRightPoint, Color.BLACK, stroke);
+            r.getProperties().put("Width", widthValue * 1.0);
+            r.getProperties().put("Height", lengthValue * 1.0);
             parent.engine.addShape(r);
             parent.repaint();
             

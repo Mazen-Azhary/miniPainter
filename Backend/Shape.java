@@ -4,22 +4,31 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Stroke;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Shape implements ShapeInterface {
-
+public abstract class Shape implements ShapeInterface,Serializable{
+    protected static final long serialVersionUID = 1L;
     protected Point topLeftPoint;
     protected Point bottomRightPoint;
     protected Map<String, Double> properties = new HashMap<>();
     protected Color color;
     protected boolean fill;
-    protected Stroke stroke;
+    protected float stroke; 
 
+    
+    
+    
     public Shape(Point topLeftPoint, Point bottomRightPoint, Color color,float stroke) {
         setPosition(topLeftPoint, bottomRightPoint);
         this.color = color;
-        this.stroke=new BasicStroke(stroke);
+        this.stroke=stroke;        
+        getProperties().put("Borderwidth", Math.abs(bottomRightPoint.x-topLeftPoint.x)*1.0);
+        getProperties().put("Borderlength", Math.abs(bottomRightPoint.y-topLeftPoint.y)*1.0);
+        getProperties().put("stroke",stroke*1.0);
+        printProperties();
+        
     }
     
     
@@ -37,13 +46,22 @@ public abstract class Shape implements ShapeInterface {
 
     public void setPosition(Point startingP) {
     this.topLeftPoint = startingP;
-    getProperties().put("Borderwidth", Math.abs(bottomRightPoint.x-topLeftPoint.x)*1.0);
-        getProperties().put("Borderlength", Math.abs(bottomRightPoint.y-topLeftPoint.y)*1.0);
+    
+    
+    
     double width = getProperties().get("Borderwidth");   
     double length = getProperties().get("Borderlength");   
     this.bottomRightPoint = new Point((int)(topLeftPoint.x + width),(int) (topLeftPoint.y + length));
 }
 
+    
+    public void printProperties() {
+    getProperties().forEach((key, value) -> 
+        System.out.println("Key: " + key + ", Value: " + value)
+    );
+}
+
+    
     
     public Map<String, Double> getProperties() {
 
