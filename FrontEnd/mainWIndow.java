@@ -6,9 +6,15 @@ package FrontEnd;
 
 import Backend.*;
 import java.awt.Graphics;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -22,20 +28,30 @@ public class mainWIndow extends javax.swing.JFrame {
      * Creates new form mainWIndow
      */
     public mainWIndow() {
-        engine = new DrawerClass();
-        initComponents();
-        this.setTitle("Vector Drawing Application");
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        SwingUtilities.invokeLater(() -> {
-            updateBoundaryLabels();
-        });
-        
-        engine.loadObjects();
-        bindShapesToComboBox();
-       
-    }
+    engine = new DrawerClass();
+    initComponents();
+    this.setTitle("Vector Drawing Application");
+    this.setResizable(false);
+    this.setLocationRelativeTo(null);
+    this.setVisible(true);
+    
+    SwingUtilities.invokeLater(() -> {
+        updateBoundaryLabels();
+    });
+
+    setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    
+    
+    addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent e) {
+            exitAction();  
+        }
+    });
+     engine.loadObjects();
+    bindShapesToComboBox();
+}
+
 
     private void updateBoundaryLabels() {
     int Width = this.drawingArea.getWidth();
@@ -44,6 +60,44 @@ public class mainWIndow extends javax.swing.JFrame {
     this.welcomeLabel2.setText("The allowed drawing boundaries are from");
     this.welcomeLabel1.setText(boundaryText1);
     this.welcomeLabel.setText("(0,0) (top left) to (" + (Width - 1) + "," + (Height - 1) + ")");
+}
+
+    
+    private Shape[] loadShapesFromFile() {
+    ArrayList<Shape> loadedShapes = new ArrayList<>();
+    try (FileInputStream file = new FileInputStream("shapes.dat");
+         ObjectInputStream ois = new ObjectInputStream(file)) {
+
+        while (true) {
+            try {
+                Shape shape = (Shape) ois.readObject();
+                loadedShapes.add(shape);
+            } catch (EOFException e) {
+                break;  
+            }
+        }
+    } catch (IOException | ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+    return loadedShapes.toArray(new Shape[0]);
+}
+
+    
+    private void exitAction() {
+    
+    Shape[] savedShapes = engine.getShapes();
+
+    if (savedShapes.length != loadShapesFromFile().length) {       
+        int response = JOptionPane.showConfirmDialog(null,"You have unsaved changes. Do you want to save before exiting?","Save Changes",JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if (response == JOptionPane.YES_OPTION) {
+            engine.saveObjects();  
+        } else if (response == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        }
+        } else {
+        System.exit(0);
+    }
 }
 
 
