@@ -25,6 +25,7 @@ private static mainWIndow parent;
         setTitle("Move Shape");
         setResizable(false);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -162,7 +163,9 @@ private static mainWIndow parent;
                 int x = Integer.parseInt(xText); 
                 int y = Integer.parseInt(yText); 
                 this.ShapeToChange.setPosition(new Point(x, y));//overloaded method                
+                JOptionPane.showMessageDialog(this, "Shape successfully moved.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 parent.repaint();
+                dispose();
             }catch(ArithmeticException e){
                JOptionPane.showMessageDialog(this, "Please enter valid numbers for all fields", "Insufficient fields", JOptionPane.ERROR_MESSAGE);            
             } 

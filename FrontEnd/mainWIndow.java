@@ -6,6 +6,7 @@ package FrontEnd;
 
 import Backend.*;
 import java.awt.Graphics;
+import static java.lang.Thread.sleep;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -27,8 +28,6 @@ public class mainWIndow extends javax.swing.JFrame {
         this.setTitle("Vector Drawing Application");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        //this.drawingArea.setSize(new Dimension(this.drawingArea.getWidth(),this.drawingArea.getHeight()));
-        // this.setSize(new Dimension(835, 445));
         this.setVisible(true);
         SwingUtilities.invokeLater(() -> {
             updateBoundaryLabels();
@@ -316,10 +315,14 @@ public class mainWIndow extends javax.swing.JFrame {
 
         try {
             //engine.removeShape(engine.getShapes()[shapeIndex]);
+            
+           // System.out.println(engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()]);
+            
+
+            
             MoveShapeWindow w = new MoveShapeWindow(engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()],this);
             w.setVisible(true);
-            //JOptionPane.showMessageDialog(this, "Shape successfully moved.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            //repaint();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Failed to move shape. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
 

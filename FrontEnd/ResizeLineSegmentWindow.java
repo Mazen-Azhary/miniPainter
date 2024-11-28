@@ -24,6 +24,7 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
         this.shapeToEdit= shapeToEdit;
         this.parent=parent;
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Resize Line Segment Window");
     }
 
@@ -38,34 +39,26 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
 
         newX1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        newY1Text = new javax.swing.JTextField();
-        newX1Text = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        newY2Field = new javax.swing.JTextField();
+        newLengthField = new javax.swing.JTextField();
+        newSlopeText = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        newX2Text = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        newX1.setText("new X1");
+        newX1.setText("new Slope");
 
-        jLabel2.setText("new Y1");
+        jLabel2.setText("new Length");
 
-        newX1Text.addActionListener(new java.awt.event.ActionListener() {
+        newLengthField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newX1TextActionPerformed(evt);
+                newLengthFieldActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("new X2");
-
-        jLabel3.setText("new Y2");
-
-        newX2Text.addActionListener(new java.awt.event.ActionListener() {
+        newSlopeText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newX2TextActionPerformed(evt);
+                newSlopeTextActionPerformed(evt);
             }
         });
 
@@ -84,28 +77,21 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
                 .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(newX1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newY2Field, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(newSlopeText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newLengthField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newX1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(newX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,73 +99,67 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newX1)
-                    .addComponent(newX1Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(newY1Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newSlopeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(newX2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(submitButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(newY2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newLengthField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addGap(54, 54, 54)
+                .addComponent(submitButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newX1TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newX1TextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newX1TextActionPerformed
-
-    private void newX2TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newX2TextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newX2TextActionPerformed
+    private void newSlopeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSlopeTextActionPerformed
+        
+    }//GEN-LAST:event_newSlopeTextActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        String x1t = newX1Text.getText().trim().replace(" ", "").replace("\n", "");
-        String y1t = newY1Text.getText().trim().replace(" ", "").replace("\n", "");
-        String x2t = newX2Text.getText().trim().replace(" ", "".replace("\n", ""));
-        String y2t = newY2Field.getText().trim().replace(" ", "").replace("\n", "");
+    String newSlopeTxt = newSlopeText.getText().trim().replace(" ", "").replace("\n", "");
+    String newLenTxt = newLengthField.getText().trim().replace(" ", "").replace("\n", "");
+    if (!newSlopeTxt.isEmpty() && !newLenTxt.isEmpty()) {
+        try {
+            double slope = Double.parseDouble(newSlopeTxt);
+            double len = Double.parseDouble(newLenTxt);
+            Point[] pos = shapeToEdit.getPosition();
+            
+            double x1 = pos[0].x;
+            double y1 = pos[0].y;
 
-        if (!x1t.isEmpty() && !y1t.isEmpty() && !x2t.isEmpty() && !y2t.isEmpty()) {
-            try {
-                int x1 = Integer.parseInt(x1t);
-                int x2 = Integer.parseInt(x2t);
-                int y1 = Integer.parseInt(y1t);
-                int y2 = Integer.parseInt(y2t);
-                shapeToEdit.setPosition(new Point(x1, y1), new Point(x2, y2));
-                shapeToEdit.getProperties().put("startingX", x1 * 1.0);
-                shapeToEdit.getProperties().put("startingY", y1 * 1.0);
-                shapeToEdit.getProperties().put("endingX", x2 * 1.0);
-                shapeToEdit.getProperties().put("endingY", y2 * 1.0);
-                try {
-                    shapeToEdit.getProperties().put("slope", (y2 - y1) / (x2 - x1) * 1.0);
-                } catch (ArithmeticException e) {
-                    shapeToEdit.getProperties().put("slope", Double.MAX_VALUE);
-                }
-                parent.repaint();
-                dispose();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "please input valid numbers", "invalid entry", JOptionPane.ERROR_MESSAGE);
+            double x2, y2; //two eq in two unknown , slope eq and len eq
+            if (slope==Double.POSITIVE_INFINITY){
+                // vertical line case
+                x2 = x1;
+                y2 = y1 + len; 
+            } else {
+                double distancex = len / Math.sqrt(1 + slope * slope);
+                double distancey = slope * distancex;
+
+                
+                x2 = x1 + distancex; 
+                y2 = y1 + distancey; 
             }
-
+            shapeToEdit.setPosition(pos[0], new Point((int) x2, (int) y2));
+            shapeToEdit.getProperties().put("length", len);
+            shapeToEdit.getProperties().put("slope", slope);
+            JOptionPane.showMessageDialog(null, "Shape resized succesfuly");    
+            parent.repaint();
+            dispose();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please input valid numbers", "Invalid Entry", JOptionPane.ERROR_MESSAGE);
         }
+}
+
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void newLengthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLengthFieldActionPerformed
+        
+    }//GEN-LAST:event_newLengthFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,15 +197,11 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField newLengthField;
+    private javax.swing.JTextField newSlopeText;
     private javax.swing.JLabel newX1;
-    private javax.swing.JTextField newX1Text;
-    private javax.swing.JTextField newX2Text;
-    private javax.swing.JTextField newY1Text;
-    private javax.swing.JTextField newY2Field;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

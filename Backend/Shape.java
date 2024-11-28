@@ -17,8 +17,7 @@ public abstract class Shape implements ShapeInterface {
     protected Stroke stroke;
 
     public Shape(Point topLeftPoint, Point bottomRightPoint, Color color,float stroke) {
-        this.topLeftPoint = topLeftPoint;
-        this.bottomRightPoint = bottomRightPoint;
+        setPosition(topLeftPoint, bottomRightPoint);
         this.color = color;
         this.stroke=new BasicStroke(stroke);
     }
@@ -27,14 +26,21 @@ public abstract class Shape implements ShapeInterface {
     
 
     public void setPosition(Point startingP, Point EndingP) {
+        
         this.topLeftPoint = startingP;
+       // getProperties().put("Borderwidth", Math.abs(bottomRightPoint.x-topLeftPoint.x)*1.0);
+       // getProperties().put("Borderlength", Math.abs(bottomRightPoint.y-topLeftPoint.y)*1.0);
+       // double width = getProperties().get("Borderwidth");   
+       // double length = getProperties().get("Borderlength");
         this.bottomRightPoint = EndingP;
     }
 
     public void setPosition(Point startingP) {
     this.topLeftPoint = startingP;
+    getProperties().put("Borderwidth", Math.abs(bottomRightPoint.x-topLeftPoint.x)*1.0);
+        getProperties().put("Borderlength", Math.abs(bottomRightPoint.y-topLeftPoint.y)*1.0);
     double width = getProperties().get("Borderwidth");   
-    double length = getProperties().get("Borderlength"); 
+    double length = getProperties().get("Borderlength");   
     this.bottomRightPoint = new Point((int)(topLeftPoint.x + width),(int) (topLeftPoint.y + length));
 }
 
@@ -65,9 +71,10 @@ public abstract class Shape implements ShapeInterface {
         return this.fill;
     }
     
-    public Point[] getPosition(Point start,Point end){
+    public Point[] getPosition(){
         Point[] p = {this.topLeftPoint,this.bottomRightPoint};
         return p;        
     }
+    
     
 }
