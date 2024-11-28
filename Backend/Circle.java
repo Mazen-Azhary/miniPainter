@@ -50,6 +50,14 @@ public class Circle extends Shape {
             g2d.drawOval(topLeftPoint.x, topLeftPoint.y, (int) radius, (int) radius);
 
     }
+    
+    public void setRadius(double radius){
+    if(radius<0){
+    return;
+    } 
+    this.radius=radius;
+    properties.put("radius", radius);
+    }
 
     
     public void setProperties(Map<String, Double> properties) {//properties:radius,color,centre

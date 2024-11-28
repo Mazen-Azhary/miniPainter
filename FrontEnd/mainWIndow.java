@@ -6,7 +6,6 @@ package FrontEnd;
 
 import Backend.*;
 import java.awt.Graphics;
-import static java.lang.Thread.sleep;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -335,12 +334,16 @@ public class mainWIndow extends javax.swing.JFrame {
     private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
         Shape shape = engine.getShapes()[ShapeChooserComboBox.getSelectedIndex()];
         if(shape instanceof Circle){
-
+            ResizeCircleWindow r = new ResizeCircleWindow(this, shape);
+            r.setVisible(true);
         }else if(shape instanceof LineSegment){
             ResizeLineSegmentWindow r = new ResizeLineSegmentWindow(shape,this);
             r.setVisible(true);
         }else if(shape instanceof Rectangle && !(shape instanceof Square)){
-
+            
+            ResizeRectangleWindow r = new ResizeRectangleWindow(this, shape);
+            r.setVisible(true);
+            
         }else if(!(shape instanceof Rectangle) && (shape instanceof Square)){
 
         }

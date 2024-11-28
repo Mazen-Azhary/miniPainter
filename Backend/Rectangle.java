@@ -52,6 +52,17 @@ public class Rectangle extends Shape {
 
         }
     }
+    
+    public boolean setDimentions(int width,int length){
+    if(width<0 || length<0){
+    return false;
+    }
+    this.width=width;
+    this.height=length;
+    properties.put("Width",width*1.0);
+    properties.put("Length",width*1.0);
+    return true;
+    }
 
     public void draw(Graphics canvas) {
         Graphics2D g2d = (Graphics2D) canvas;

@@ -26,6 +26,8 @@ public class ResizeLineSegmentWindow extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Resize Line Segment Window");
+        setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
