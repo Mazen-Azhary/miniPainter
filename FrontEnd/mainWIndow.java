@@ -49,7 +49,7 @@ public class mainWIndow extends javax.swing.JFrame {
         }
     });
      engine.loadObjects();
-    bindShapesToComboBox();
+     bindShapesToComboBox();
 }
 
 
@@ -65,7 +65,7 @@ public class mainWIndow extends javax.swing.JFrame {
     
     private Shape[] loadShapesFromFile() {
     ArrayList<Shape> loadedShapes = new ArrayList<>();
-    try (FileInputStream file = new FileInputStream("shapes.dat");
+    try (FileInputStream file = new FileInputStream(engine.getFile());
          ObjectInputStream ois = new ObjectInputStream(file)) {
 
         while (true) {
